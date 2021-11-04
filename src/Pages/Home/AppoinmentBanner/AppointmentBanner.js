@@ -1,8 +1,8 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import doctor from '../../images/doctor.png'
-import bg from '../../images/appointment-bg.png'
+import doctor from '../../../images/doctor.png'
+import bg from '../../../images/appointment-bg.png'
 import { Button, Typography } from '@mui/material';
 
 const appointmentBanner = {
@@ -39,7 +39,6 @@ const AppointmentBanner = () => {
           <Button variant="contained" style={{backgroundColor: '#5CE7ED'}}>Learn More</Button>
           </Box>
         </Grid>
-        
       </Grid>
     </Box>
     );
