@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import { Container, Grid, TextField, Typography, Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import login from "../../../images/login.png";
+import useAuth from "../../../hooks/useAuth";
 
 const Register = () => {
-    const [loginData, setLoginData] = useState({})
+  const [loginData, setLoginData] = useState({})
+
+  const {registerUser} = useAuth()
+
   const handleOnChange = e => {
     const field = e.target.name;
     const value = e.target.value;
@@ -17,6 +21,7 @@ const Register = () => {
         alert('Your password did not match');
         return;
     }
+    registerUser(loginData.email, loginData.password);
     e.preventDefault();
   };
     return (
@@ -54,7 +59,7 @@ const Register = () => {
               onChange={handleOnChange}
               variant="standard"
             />
-            <Button sx={{width: '75%', m: 1}} type="submit" variant="contained">Login</Button>
+            <Button sx={{width: '75%', m: 1}} type="submit" variant="contained">Register</Button>
             <NavLink 
             style={{textDecoration: 'none'}} 
             to="/login">
