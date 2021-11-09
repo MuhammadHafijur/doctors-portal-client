@@ -14,6 +14,7 @@ initializeFirebase();
 const useFirebase = () => {
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [auError, setAuthError] = useState('')
 
   const auth = getAuth();
 
@@ -25,9 +26,7 @@ const useFirebase = () => {
         const user = userCredential.user;
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
+        setAuthError(error.message);
       })
       .finally(() => setIsLoading(false));
   };
@@ -41,8 +40,7 @@ const useFirebase = () => {
       // ...
     })
     .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+      setAuthError(error.message);
     })
     .finally(() => setIsLoading(false));
   }

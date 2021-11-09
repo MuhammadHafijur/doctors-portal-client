@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Grid, TextField, Typography, Button } from "@mui/material";
+import { Container, Grid, TextField, Typography, Button, CircularProgress, Alert } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import login from "../../../images/login.png";
 import useAuth from "../../../hooks/useAuth";
@@ -7,7 +7,7 @@ import useAuth from "../../../hooks/useAuth";
 const Register = () => {
   const [loginData, setLoginData] = useState({})
 
-  const {registerUser} = useAuth()
+  const { user, registerUser, isLoading} = useAuth()
 
   const handleOnChange = e => {
     const field = e.target.name;
@@ -31,7 +31,7 @@ const Register = () => {
           <Typography variant="body1" gutterBottom>
             Register
           </Typography>
-          <form onSubmit={handleLoginSubmit}>
+          { !isLoading && <form onSubmit={handleLoginSubmit}>
             <TextField
               sx={{width: '75%', m: 1}}
               id="standard-basic"
@@ -65,7 +65,9 @@ const Register = () => {
             to="/login">
             <Button variant="text">Already Registered? Please Login</Button>
             </NavLink>
-          </form>
+          </form>}
+          {user?.email && <Alert severity="success">User created successfully</Alert>}
+          {isLoading && <CircularProgress />}
         </Grid>
         <Grid item xs={12} md={6}>
           <img style={{ width: "100%" }} src={login} alt="" />
