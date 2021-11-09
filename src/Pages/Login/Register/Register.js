@@ -7,7 +7,7 @@ import useAuth from "../../../hooks/useAuth";
 const Register = () => {
   const [loginData, setLoginData] = useState({})
 
-  const { user, registerUser, isLoading} = useAuth()
+  const { user, registerUser, isLoading, authError} = useAuth()
 
   const handleOnChange = e => {
     const field = e.target.name;
@@ -66,8 +66,9 @@ const Register = () => {
             <Button variant="text">Already Registered? Please Login</Button>
             </NavLink>
           </form>}
-          {user?.email && <Alert severity="success">User created successfully</Alert>}
           {isLoading && <CircularProgress />}
+          {user?.email && <Alert severity="success">User created successfully</Alert>}
+          {authError && <Alert severity="error">{authError}</Alert>}
         </Grid>
         <Grid item xs={12} md={6}>
           <img style={{ width: "100%" }} src={login} alt="" />
